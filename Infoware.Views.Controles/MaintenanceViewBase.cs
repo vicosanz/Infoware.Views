@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Infoware.Views;
 using Infoware.Views.Attributes;
 
 namespace Infoware.Views.Controles
@@ -39,7 +31,7 @@ namespace Infoware.Views.Controles
         public bool AllowSearch { get; set; } = true;
         public bool AllowNew
         {
-            get => _allowNew; 
+            get => _allowNew;
             set
             {
                 _allowNew = value;
@@ -48,7 +40,7 @@ namespace Infoware.Views.Controles
         }
         public bool AllowDelete
         {
-            get => _allowDelete; 
+            get => _allowDelete;
             set
             {
                 _allowDelete = value;
@@ -253,7 +245,10 @@ namespace Infoware.Views.Controles
 
         private void BtnListEdit_Click(object sender, EventArgs e)
         {
-            splitContainer1.Panel1Collapsed = true;
+            if (BindingSourceView.Current != null)
+            {
+                splitContainer1.Panel1Collapsed = true;
+            }
         }
 
         public void ShowRecordReadonly()
@@ -274,7 +269,14 @@ namespace Infoware.Views.Controles
 
         private void DataGridViewView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            OnRecordSelected?.Invoke(sender, e);
+            if (CanSelection)
+            {
+                OnRecordSelected?.Invoke(sender, EventArgs.Empty);
+            }
+            else
+            {
+                BtnListEdit_Click(sender, EventArgs.Empty);
+            }
         }
 
         private void BtnListSeleccionar_Click(object sender, EventArgs e)

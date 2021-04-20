@@ -114,7 +114,7 @@ namespace Infoware.Views.Controles
 
         public bool Readonly
         {
-            get => _readonly; 
+            get => _readonly;
             internal set
             {
                 bool mustUpdate = _readonly != value;
@@ -222,6 +222,7 @@ namespace Infoware.Views.Controles
                     {
                         Dock = DockStyle.Fill,
                         FlowDirection = FlowDirection.TopDown,
+                        AutoScroll = true
                     };
                     tabPage.Controls.Add(panel);
                     TabPages.Add(tabPage);
@@ -245,7 +246,7 @@ namespace Infoware.Views.Controles
                     {
                         Tag = attr,
                         Width = attr.Size * 10,
-                        ReadOnly = isEnable,
+                        ReadOnly = !isEnable,
                         TabStop = isEnable
                     };
                     textBox.DataBindings.Add(new Binding(nameof(TextBox.Text), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged));
@@ -373,7 +374,7 @@ namespace Infoware.Views.Controles
                         ReadOnly = !isEnable,
                         TabStop = isEnable
                     };
-                    textBox.DataBindings.Add(new Binding(nameof(TextBox.Text), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged));
+                    textBox.DataBindings.Add(new Binding(nameof(TextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty));
 
                     CreatePanelControl(panel, attr, textBox, 30);
                 }
@@ -395,7 +396,7 @@ namespace Infoware.Views.Controles
         {
             CreatePanelControl(panel, attr, new Control[] { control }, height);
         }
-            
+
         public static void CreatePanelControl(
             FlowLayoutPanel pnlTab, ShowAsAttribute attrLabel, Control[] controls, int height)
         {

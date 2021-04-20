@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Infoware.Views;
 
 namespace Infoware.Views.Controles
 {
@@ -16,6 +11,14 @@ namespace Infoware.Views.Controles
         public BindingSourceView()
         {
             InitializeComponent();
+            bindingSource1.CurrentItemChanged += BindingSource1_CurrentItemChanged;
+        }
+
+        public event EventHandler CurrentItemChanged;
+
+        private void BindingSource1_CurrentItemChanged(object sender, EventArgs e)
+        {
+            CurrentItemChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public BindingSourceView(IContainer container)
@@ -23,6 +26,7 @@ namespace Infoware.Views.Controles
             container.Add(this);
 
             InitializeComponent();
+            bindingSource1.CurrentItemChanged += BindingSource1_CurrentItemChanged;
         }
 
         public BindingSource BindingSource { get => bindingSource1; set => bindingSource1 = value; }
@@ -108,6 +112,7 @@ namespace Infoware.Views.Controles
         public void SetData(object data)
         {
             BindingSource.DataSource = data;
+            OnMainSourceLoaded?.Invoke(this, EventArgs.Empty);
         }
         #endregion
 

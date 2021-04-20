@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Infoware.Views
+﻿namespace Infoware.Views
 {
     public class Class1
     {

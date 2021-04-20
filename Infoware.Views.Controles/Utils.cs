@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Infoware.Views;
-using Infoware.Views.Attributes;
-using System.ComponentModel;
 using Infoware.Core.Extensions;
+using Infoware.Views.Attributes;
 using Infoware.Views.Extensions;
-using Infoware.Core.Attributes;
 
 namespace Infoware.Views.Controles
 {
@@ -71,7 +67,7 @@ namespace Infoware.Views.Controles
 
                 string description = attribute is null ? displayName : $"{attribute.Code} {displayName}";
                 items.Add(new KeyValuePair<object, string>(
-                    value, 
+                    value,
                     description
                 ));
             }
