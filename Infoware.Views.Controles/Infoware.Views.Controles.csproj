@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infoware.Core\Infoware.Core\Infoware.Core.csproj" />
+    <PackageReference Include="Infoware.Core" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Infoware.Views\Infoware.Views.csproj" />
   </ItemGroup>
 
