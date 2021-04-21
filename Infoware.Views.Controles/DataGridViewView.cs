@@ -92,7 +92,7 @@ namespace Infoware.Views.Controles
                 if (menuItem.Checked)
                 {
                     DataGridViewColumn column;
-                    if (attr.PropertyInfo.PropertyType.IsEnum && attr.PropertyInfo.PropertyType.IsNullableEnum())
+                    if (attr.PropertyInfo.PropertyType.IsEnum || attr.PropertyInfo.PropertyType.IsNullableEnum())
                     {
                         column = new DataGridViewComboBoxColumn();
 

@@ -137,7 +137,7 @@ namespace Infoware.Views.Controles
             // btnListBuscar
             // 
             this.btnListBuscar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnListBuscar.Image = global::Infoware.Views.Controles.Properties.Resources.search;
+            this.btnListBuscar.Image = global::Infoware.Views.Controles.Properties.Resources.searching_magnifying_glass;
             this.btnListBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnListBuscar.Name = "btnListBuscar";
             this.btnListBuscar.Size = new System.Drawing.Size(29, 24);
@@ -152,7 +152,7 @@ namespace Infoware.Views.Controles
             // 
             // btnListSeleccionar
             // 
-            this.btnListSeleccionar.Image = global::Infoware.Views.Controles.Properties.Resources.post;
+            this.btnListSeleccionar.Image = global::Infoware.Views.Controles.Properties.Resources.tick_inside_circle;
             this.btnListSeleccionar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnListSeleccionar.Name = "btnListSeleccionar";
             this.btnListSeleccionar.Size = new System.Drawing.Size(109, 24);
@@ -165,7 +165,7 @@ namespace Infoware.Views.Controles
             // 
             // btnListNuevo
             // 
-            this.btnListNuevo.Image = global::Infoware.Views.Controles.Properties.Resources._new;
+            this.btnListNuevo.Image = global::Infoware.Views.Controles.Properties.Resources.round_add_button;
             this.btnListNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnListNuevo.Name = "btnListNuevo";
             this.btnListNuevo.Size = new System.Drawing.Size(76, 24);
@@ -174,7 +174,7 @@ namespace Infoware.Views.Controles
             // btnListEdit
             // 
             this.btnListEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnListEdit.Image = global::Infoware.Views.Controles.Properties.Resources.open;
+            this.btnListEdit.Image = global::Infoware.Views.Controles.Properties.Resources.create_new_pencil_button;
             this.btnListEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnListEdit.Name = "btnListEdit";
             this.btnListEdit.Size = new System.Drawing.Size(29, 24);
@@ -188,7 +188,7 @@ namespace Infoware.Views.Controles
             // btnListEliminar
             // 
             this.btnListEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnListEliminar.Image = global::Infoware.Views.Controles.Properties.Resources.delete;
+            this.btnListEliminar.Image = global::Infoware.Views.Controles.Properties.Resources.rubbish_bin_delete_button;
             this.btnListEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnListEliminar.Name = "btnListEliminar";
             this.btnListEliminar.Size = new System.Drawing.Size(29, 24);
@@ -203,6 +203,7 @@ namespace Infoware.Views.Controles
             this.tabControlView1.SelectedIndex = 0;
             this.tabControlView1.Size = new System.Drawing.Size(808, 515);
             this.tabControlView1.TabIndex = 3;
+            this.tabControlView1.TitleText = "";
             // 
             // toolStrip2
             // 
@@ -218,7 +219,7 @@ namespace Infoware.Views.Controles
             // 
             // btnMantCancelar
             // 
-            this.btnMantCancelar.Image = global::Infoware.Views.Controles.Properties.Resources.cancel;
+            this.btnMantCancelar.Image = global::Infoware.Views.Controles.Properties.Resources.cancel_button;
             this.btnMantCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMantCancelar.Name = "btnMantCancelar";
             this.btnMantCancelar.Size = new System.Drawing.Size(90, 24);
@@ -226,7 +227,7 @@ namespace Infoware.Views.Controles
             // 
             // btnMantGuardar
             // 
-            this.btnMantGuardar.Image = global::Infoware.Views.Controles.Properties.Resources.save;
+            this.btnMantGuardar.Image = global::Infoware.Views.Controles.Properties.Resources.save_button;
             this.btnMantGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMantGuardar.Name = "btnMantGuardar";
             this.btnMantGuardar.Size = new System.Drawing.Size(86, 24);
@@ -283,7 +284,6 @@ namespace Infoware.Views.Controles
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnListEliminar;
         private System.Windows.Forms.ToolStrip toolStrip2;

@@ -23,6 +23,7 @@ namespace Infoware.Views.Attributes
         public string Label => DisplayAttribute?.GetName() ?? PropertyInfo.Name;
 
         public PropertyInfo PropertyInfo { get; set; }
+        public string ShowIf { get; set; }
 
         public ShowAsAttribute(EnumControls enumControl)
         {

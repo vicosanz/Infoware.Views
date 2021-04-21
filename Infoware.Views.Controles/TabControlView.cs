@@ -142,7 +142,7 @@ namespace Infoware.Views.Controles
                     attributes = Utils.GetProperties((IList)DataSource, x => x.ShowInEdition);
                     RefreshColumns();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     throw;
                 }
@@ -192,6 +192,7 @@ namespace Infoware.Views.Controles
 
         private void RefreshColumns()
         {
+            SuspendLayout();
             TabPages.Clear();
             var sortByCategories = attributes.OrderBy(x => x.Category).ToList();
             string category = null;
@@ -251,7 +252,11 @@ namespace Infoware.Views.Controles
                     };
                     textBox.DataBindings.Add(new Binding(nameof(TextBox.Text), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged));
 
-                    CreatePanelControl(panel, null, new Control[] { link, textBox }, 30);
+                    var panelField = CreatePanelControl(panel, null, new Control[] { link, textBox }, 30);
+                    if (!string.IsNullOrWhiteSpace(attr.ShowIf))
+                    {
+                        panelField.DataBindings.Add(nameof(Visible), dataSource, attr.ShowIf);
+                    }
                 }
                 else if (attr.Control == EnumControls.List)
                 {
@@ -264,54 +269,12 @@ namespace Infoware.Views.Controles
                     control.OnPreparingAddingNewRecord += Control_OnPreparingAddingNewRecord;
 
                     control.DataBindings.Add(new(nameof(MaintenanceViewBase.Data), dataSource, attr.PropertyInfo.Name));
-                    //control.DataBindings.Add(new(nameof(MaintenanceViewBase.Parent), dataSource, "this"));
                     panel.Controls.Add(control);
-
-                    //BindingSource newBindingSource = new(dataSource, attr.Field);
-                    //Button button = new()
-                    //{
-                    //    Text = "Add",
-                    //    Tag = newBindingSource
-                    //};
-                    //button.Click += ButtonAddItemList_Click;
-                    //DataGridViewView dataGrid = new()
-                    //{
-                    //    Tag = attr,
-                    //    DataSource = newBindingSource,
-                    //    ReadOnly = _readonly
-                    //};
-                    //dataGrid.CellDoubleClick += Column2_CellDoubleClick;
-                    //panel.Controls.AddRange(new Control[] { button, dataGrid });
+                    if (!string.IsNullOrWhiteSpace(attr.ShowIf))
+                    {
+                        panel.DataBindings.Add(nameof(Visible), dataSource, attr.ShowIf);
+                    }
                 }
-                //else if (attr.Control == EnumControls.ComboBox)
-                //{
-                //    if (attr.UpdateField is null)
-                //    {
-                //        throw new Exception($"UpdateField property in ComboBox is missing");
-                //    }
-                //    IFormBaseGUI form = (IFormBaseGUI)TopLevelControl ?? throw new ArgumentNullException(nameof(IFormBaseGUI));
-                //    form.Sources.TryGetValue(attr.Field, out object result);
-                //    if (result is null)
-                //    {
-                //        throw new Exception($"No source for combobox {attr.Field}");
-                //    }
-
-                //    var sourceAttrs = Utils.GetProperties((IList)result);
-                //    string displayMember = sourceAttrs.FirstOrDefault(x => x.IsDefaultValue)?.Field;
-                //    string valueMember = sourceAttrs.FirstOrDefault(x => x.IsDefaultId)?.Field;
-
-                //    ComboBox comboBox = new()
-                //    {
-                //        DropDownStyle = ComboBoxStyle.DropDownList,
-                //        DataSource = result,
-                //        DisplayMember = displayMember,
-                //        ValueMember = valueMember,
-                //        Tag = attr,
-                //    };
-                //    comboBox.DataBindings.Add(new Binding(nameof(comboBox.SelectedValue), dataSource, attr.UpdateField));
-                //    comboBox.DataBindings.Add(new Binding(nameof(comboBox.SelectedItem), dataSource, attr.Field));
-                //    panel.Controls.Add(CreatePanelControl(attr, comboBox));
-                //}
                 else if (attr.PropertyInfo.PropertyType.IsEnum)
                 {
                     List<KeyValuePair<object, string>> items = Utils.EnumToComboData(attr);
@@ -329,7 +292,11 @@ namespace Infoware.Views.Controles
                     };
                     comboBox.DataBindings.Add(new Binding(nameof(comboBox.SelectedValue), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged));
                     controls.Add(comboBox);
-                    CreatePanelControl(panel, attr, controls.ToArray(), 33);
+                    var panelField = CreatePanelControl(panel, attr, controls.ToArray(), 33);
+                    if (!string.IsNullOrWhiteSpace(attr.ShowIf))
+                    {
+                        panelField.DataBindings.Add(nameof(Visible), dataSource, attr.ShowIf);
+                    }
                 }
                 else if (attr.PropertyInfo.PropertyType.IsNullableEnum())
                 {
@@ -349,7 +316,11 @@ namespace Infoware.Views.Controles
                     Binding binding = new(nameof(comboBox.SelectedValue), dataSource, attr.UpdateField, false, DataSourceUpdateMode.OnPropertyChanged);
                     comboBox.DataBindings.Add(binding);
                     controls.Add(comboBox);
-                    CreatePanelControl(panel, attr, controls.ToArray(), 33);
+                    var panelField = CreatePanelControl(panel, attr, controls.ToArray(), 33);
+                    if (!string.IsNullOrWhiteSpace(attr.ShowIf))
+                    {
+                        panelField.DataBindings.Add(nameof(Visible), dataSource, attr.ShowIf);
+                    }
                 }
                 else if (attr.PropertyInfo.PropertyType.Equals(typeof(bool)))
                 {
@@ -361,8 +332,11 @@ namespace Infoware.Views.Controles
                         Enabled = isEnable,
                         TabStop = isEnable
                     };
-                    Binding binding = new(nameof(CheckBox.Checked), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged);
-                    checkBox.DataBindings.Add(binding);
+                    checkBox.DataBindings.Add(new(nameof(CheckBox.Checked), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged));
+                    if (!string.IsNullOrWhiteSpace(attr.ShowIf))
+                    {
+                        checkBox.DataBindings.Add(new(nameof(Visible), dataSource, attr.ShowIf));
+                    }
                     panel.Controls.Add(checkBox);
                 }
                 else
@@ -376,9 +350,15 @@ namespace Infoware.Views.Controles
                     };
                     textBox.DataBindings.Add(new Binding(nameof(TextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty));
 
-                    CreatePanelControl(panel, attr, textBox, 30);
+                    var panelField = CreatePanelControl(panel, attr, textBox, 30);
+                    if (!string.IsNullOrWhiteSpace(attr.ShowIf))
+                    {
+                        panelField.DataBindings.Add(nameof(Visible), dataSource, attr.ShowIf);
+                    }
                 }
             }
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         private void Control_OnPreparingAddingNewRecord(object sender, EventArgs e)
@@ -392,12 +372,12 @@ namespace Infoware.Views.Controles
             this.SelectNextControl((Control)sender, true, true, true, true);
         }
 
-        public static void CreatePanelControl(FlowLayoutPanel panel, ShowAsAttribute attr, Control control, int height)
+        public static FlowLayoutPanel CreatePanelControl(FlowLayoutPanel panel, ShowAsAttribute attr, Control control, int height)
         {
-            CreatePanelControl(panel, attr, new Control[] { control }, height);
+            return CreatePanelControl(panel, attr, new Control[] { control }, height);
         }
 
-        public static void CreatePanelControl(
+        public static FlowLayoutPanel CreatePanelControl(
             FlowLayoutPanel pnlTab, ShowAsAttribute attrLabel, Control[] controls, int height)
         {
             FlowLayoutPanel pnlControl = new()
@@ -418,6 +398,7 @@ namespace Infoware.Views.Controles
             }
             pnlControl.Controls.AddRange(controls);
             pnlTab.Controls.Add(pnlControl);
+            return pnlControl;
         }
 
         private void ButtonAddItemList_Click(object sender, EventArgs e)
@@ -434,7 +415,5 @@ namespace Infoware.Views.Controles
         {
             TabPages.Clear();
         }
-
-
     }
 }
