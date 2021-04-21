@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Version>1.0.0</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/vicosanz/Infoware.Views</RepositoryUrl>
+    <Authors>Victor Sanchez</Authors>
+    <Company>Infoware Soluciones</Company>
   </PropertyGroup>
 
   <ItemGroup>
