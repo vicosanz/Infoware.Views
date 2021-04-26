@@ -38,6 +38,17 @@ namespace Infoware.Views.Controles
                 btnListNuevo.Visible = _allowNew;
             }
         }
+
+        public bool AllowEdit
+        {
+            get => _allowEdit; 
+            set
+            {
+                _allowEdit = value;
+                btnListEdit.Visible = _allowEdit;
+            }
+        }
+
         public bool AllowDelete
         {
             get => _allowDelete;
@@ -74,6 +85,7 @@ namespace Infoware.Views.Controles
         private bool canSelection = true;
         private bool _allowNew = true;
         private bool _allowDelete = true;
+        private bool _allowEdit;
 
         public void SetBindingSourceView(IBindingSourceView bindingSourceView)
         {
