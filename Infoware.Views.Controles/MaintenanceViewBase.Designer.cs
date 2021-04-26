@@ -35,21 +35,21 @@ namespace Infoware.Views.Controles
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewView1 = new Infoware.Views.Controles.DataGridViewView();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.lblTitulo = new System.Windows.Forms.ToolStripLabel();
-            this.txtTextoBuscar = new System.Windows.Forms.ToolStripTextBox();
-            this.btnListBuscar = new System.Windows.Forms.ToolStripButton();
-            this.sepBuscar = new System.Windows.Forms.ToolStripSeparator();
-            this.btnListSeleccionar = new System.Windows.Forms.ToolStripButton();
-            this.sepSeleccionar = new System.Windows.Forms.ToolStripSeparator();
-            this.btnListNuevo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripList = new System.Windows.Forms.ToolStrip();
+            this.lblTitle = new System.Windows.Forms.ToolStripLabel();
+            this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.btnListSearch = new System.Windows.Forms.ToolStripButton();
+            this.sepSearch = new System.Windows.Forms.ToolStripSeparator();
+            this.btnListSelect = new System.Windows.Forms.ToolStripButton();
+            this.sepSelect = new System.Windows.Forms.ToolStripSeparator();
+            this.btnListNew = new System.Windows.Forms.ToolStripButton();
             this.btnListEdit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnListEliminar = new System.Windows.Forms.ToolStripButton();
+            this.sepDelete = new System.Windows.Forms.ToolStripSeparator();
+            this.btnListDelete = new System.Windows.Forms.ToolStripButton();
             this.tabControlView1 = new Infoware.Views.Controles.TabControlView();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.btnMantCancelar = new System.Windows.Forms.ToolStripButton();
-            this.btnMantGuardar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripMaintenance = new System.Windows.Forms.ToolStrip();
+            this.btnMantCancel = new System.Windows.Forms.ToolStripButton();
+            this.btnMantSave = new System.Windows.Forms.ToolStripButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -58,8 +58,8 @@ namespace Infoware.Views.Controles
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewView1)).BeginInit();
-            this.toolStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.toolStripList.SuspendLayout();
+            this.toolStripMaintenance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,12 +72,12 @@ namespace Infoware.Views.Controles
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.dataGridViewView1);
-            this.splitContainer1.Panel1.Controls.Add(this.toolStrip1);
+            this.splitContainer1.Panel1.Controls.Add(this.toolStripList);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControlView1);
-            this.splitContainer1.Panel2.Controls.Add(this.toolStrip2);
+            this.splitContainer1.Panel2.Controls.Add(this.toolStripMaintenance);
             this.splitContainer1.Size = new System.Drawing.Size(1215, 542);
             this.splitContainer1.SplitterDistance = 403;
             this.splitContainer1.TabIndex = 0;
@@ -105,71 +105,71 @@ namespace Infoware.Views.Controles
             // 
             // toolStrip1
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblTitulo,
-            this.txtTextoBuscar,
-            this.btnListBuscar,
-            this.sepBuscar,
-            this.btnListSeleccionar,
-            this.sepSeleccionar,
-            this.btnListNuevo,
+            this.toolStripList.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStripList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblTitle,
+            this.txtSearch,
+            this.btnListSearch,
+            this.sepSearch,
+            this.btnListSelect,
+            this.sepSelect,
+            this.btnListNew,
             this.btnListEdit,
-            this.toolStripSeparator2,
-            this.btnListEliminar});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(403, 27);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
+            this.sepDelete,
+            this.btnListDelete});
+            this.toolStripList.Location = new System.Drawing.Point(0, 0);
+            this.toolStripList.Name = "toolStripList";
+            this.toolStripList.Size = new System.Drawing.Size(403, 27);
+            this.toolStripList.TabIndex = 2;
+            this.toolStripList.Text = "";
             // 
             // lblTitulo
             // 
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(0, 24);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(0, 24);
             // 
             // txtTextoBuscar
             // 
-            this.txtTextoBuscar.Name = "txtTextoBuscar";
-            this.txtTextoBuscar.Size = new System.Drawing.Size(100, 27);
-            this.txtTextoBuscar.Visible = false;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(100, 27);
+            this.txtSearch.Visible = false;
             // 
             // btnListBuscar
             // 
-            this.btnListBuscar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnListBuscar.Image = global::Infoware.Views.Controles.Properties.Resources.searching_magnifying_glass;
-            this.btnListBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnListBuscar.Name = "btnListBuscar";
-            this.btnListBuscar.Size = new System.Drawing.Size(29, 24);
-            this.btnListBuscar.Text = "Buscar";
-            this.btnListBuscar.Visible = false;
+            this.btnListSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnListSearch.Image = global::Infoware.Views.Controles.Properties.Resources.searching_magnifying_glass;
+            this.btnListSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnListSearch.Name = "btnListSearch";
+            this.btnListSearch.Size = new System.Drawing.Size(29, 24);
+            this.btnListSearch.Text = "Buscar";
+            this.btnListSearch.Visible = false;
             // 
             // sepBuscar
             // 
-            this.sepBuscar.Name = "sepBuscar";
-            this.sepBuscar.Size = new System.Drawing.Size(6, 27);
-            this.sepBuscar.Visible = false;
+            this.sepSearch.Name = "sepSearch";
+            this.sepSearch.Size = new System.Drawing.Size(6, 27);
+            this.sepSearch.Visible = false;
             // 
             // btnListSeleccionar
             // 
-            this.btnListSeleccionar.Image = global::Infoware.Views.Controles.Properties.Resources.tick_inside_circle;
-            this.btnListSeleccionar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnListSeleccionar.Name = "btnListSeleccionar";
-            this.btnListSeleccionar.Size = new System.Drawing.Size(109, 24);
-            this.btnListSeleccionar.Text = "Seleccionar";
+            this.btnListSelect.Image = global::Infoware.Views.Controles.Properties.Resources.tick_inside_circle;
+            this.btnListSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnListSelect.Name = "btnListSelect";
+            this.btnListSelect.Size = new System.Drawing.Size(109, 24);
+            this.btnListSelect.Text = "Seleccionar";
             // 
             // sepSeleccionar
             // 
-            this.sepSeleccionar.Name = "sepSeleccionar";
-            this.sepSeleccionar.Size = new System.Drawing.Size(6, 27);
+            this.sepSelect.Name = "sepSelect";
+            this.sepSelect.Size = new System.Drawing.Size(6, 27);
             // 
             // btnListNuevo
             // 
-            this.btnListNuevo.Image = global::Infoware.Views.Controles.Properties.Resources.round_add_button;
-            this.btnListNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnListNuevo.Name = "btnListNuevo";
-            this.btnListNuevo.Size = new System.Drawing.Size(76, 24);
-            this.btnListNuevo.Text = "Nuevo";
+            this.btnListNew.Image = global::Infoware.Views.Controles.Properties.Resources.round_add_button;
+            this.btnListNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnListNew.Name = "btnListNew";
+            this.btnListNew.Size = new System.Drawing.Size(76, 24);
+            this.btnListNew.Text = "Nuevo";
             // 
             // btnListEdit
             // 
@@ -180,19 +180,19 @@ namespace Infoware.Views.Controles
             this.btnListEdit.Size = new System.Drawing.Size(29, 24);
             this.btnListEdit.Text = "Editar";
             // 
-            // toolStripSeparator2
+            // sepDelete
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.sepDelete.Name = "sepDelete";
+            this.sepDelete.Size = new System.Drawing.Size(6, 27);
             // 
             // btnListEliminar
             // 
-            this.btnListEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnListEliminar.Image = global::Infoware.Views.Controles.Properties.Resources.rubbish_bin_delete_button;
-            this.btnListEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnListEliminar.Name = "btnListEliminar";
-            this.btnListEliminar.Size = new System.Drawing.Size(29, 24);
-            this.btnListEliminar.Text = "Eliminar";
+            this.btnListDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnListDelete.Image = global::Infoware.Views.Controles.Properties.Resources.rubbish_bin_delete_button;
+            this.btnListDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnListDelete.Name = "btnListDelete";
+            this.btnListDelete.Size = new System.Drawing.Size(29, 24);
+            this.btnListDelete.Text = "Eliminar";
             // 
             // tabControlView1
             // 
@@ -207,31 +207,31 @@ namespace Infoware.Views.Controles
             // 
             // toolStrip2
             // 
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnMantCancelar,
-            this.btnMantGuardar});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(808, 27);
-            this.toolStrip2.TabIndex = 2;
-            this.toolStrip2.Text = "toolStrip2";
+            this.toolStripMaintenance.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStripMaintenance.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnMantCancel,
+            this.btnMantSave});
+            this.toolStripMaintenance.Location = new System.Drawing.Point(0, 0);
+            this.toolStripMaintenance.Name = "toolStripMaintenance";
+            this.toolStripMaintenance.Size = new System.Drawing.Size(808, 27);
+            this.toolStripMaintenance.TabIndex = 2;
+            this.toolStripMaintenance.Text = "";
             // 
             // btnMantCancelar
             // 
-            this.btnMantCancelar.Image = global::Infoware.Views.Controles.Properties.Resources.cancel_button;
-            this.btnMantCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMantCancelar.Name = "btnMantCancelar";
-            this.btnMantCancelar.Size = new System.Drawing.Size(90, 24);
-            this.btnMantCancelar.Text = "Cancelar";
+            this.btnMantCancel.Image = global::Infoware.Views.Controles.Properties.Resources.cancel_button;
+            this.btnMantCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMantCancel.Name = "btnMantCancel";
+            this.btnMantCancel.Size = new System.Drawing.Size(90, 24);
+            this.btnMantCancel.Text = "Cancelar";
             // 
             // btnMantGuardar
             // 
-            this.btnMantGuardar.Image = global::Infoware.Views.Controles.Properties.Resources.save_button;
-            this.btnMantGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMantGuardar.Name = "btnMantGuardar";
-            this.btnMantGuardar.Size = new System.Drawing.Size(86, 24);
-            this.btnMantGuardar.Text = "Guardar";
+            this.btnMantSave.Image = global::Infoware.Views.Controles.Properties.Resources.save_button;
+            this.btnMantSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMantSave.Name = "btnMantSave";
+            this.btnMantSave.Size = new System.Drawing.Size(86, 24);
+            this.btnMantSave.Text = "Guardar";
             // 
             // tabPage1
             // 
@@ -271,10 +271,10 @@ namespace Infoware.Views.Controles
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewView1)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.toolStripList.ResumeLayout(false);
+            this.toolStripList.PerformLayout();
+            this.toolStripMaintenance.ResumeLayout(false);
+            this.toolStripMaintenance.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
@@ -283,24 +283,25 @@ namespace Infoware.Views.Controles
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton btnListEliminar;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton btnMantCancelar;
+        private System.Windows.Forms.ToolStrip toolStripList;
+        private System.Windows.Forms.ToolStripSeparator sepEdition;
+        private System.Windows.Forms.ToolStripButton btnListDelete;
+        private System.Windows.Forms.ToolStrip toolStripMaintenance;
+        private System.Windows.Forms.ToolStripButton btnMantCancel;
         private DataGridViewView dataGridViewView1;
         private ErrorProvider errorProvider1;
-        private ToolStripButton btnListSeleccionar;
-        private ToolStripButton btnListNuevo;
+        private ToolStripButton btnListSelect;
+        private ToolStripButton btnListNew;
         private ToolStripButton btnListEdit;
-        private ToolStripButton btnMantGuardar;
+        private ToolStripButton btnMantSave;
         private TabControlView tabControlView1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private ToolStripTextBox txtTextoBuscar;
-        private ToolStripSeparator sepBuscar;
-        private ToolStripButton btnListBuscar;
-        private ToolStripSeparator sepSeleccionar;
-        private ToolStripLabel lblTitulo;
+        private ToolStripTextBox txtSearch;
+        private ToolStripSeparator sepSearch;
+        private ToolStripButton btnListSearch;
+        private ToolStripSeparator sepSelect;
+        private ToolStripLabel lblTitle;
+        private ToolStripSeparator sepDelete;
     }
 }

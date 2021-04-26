@@ -51,9 +51,14 @@ namespace Infoware.Views.Controles
 
         public static List<KeyValuePair<object, string>> EnumToComboData(ShowAsAttribute attr)
         {
+            return EnumToComboData(attr.PropertyInfo.PropertyType);
+        }
+
+        private static List<KeyValuePair<object, string>> EnumToComboData(Type type)
+        {
             List<KeyValuePair<object, string>> items = new();
-            var typeNullable = Nullable.GetUnderlyingType(attr.PropertyInfo.PropertyType);
-            var values = Enum.GetValues(typeNullable ?? attr.PropertyInfo.PropertyType);
+            var typeNullable = Nullable.GetUnderlyingType(type);
+            var values = Enum.GetValues(typeNullable ?? type);
             if (typeNullable != null)
             {
                 items.Add(new KeyValuePair<object, string>(null, "<Vacío>"));
@@ -77,14 +82,19 @@ namespace Infoware.Views.Controles
 
         public static List<KeyValuePair<int, string>> EnumToComboDataInt(ShowAsAttribute attr)
         {
+            return EnumToComboDataInt(attr.PropertyInfo.PropertyType);
+        }
+
+        private static List<KeyValuePair<int, string>> EnumToComboDataInt(Type type)
+        {
             List<KeyValuePair<int, string>> items = new();
-            var typeNullable = Nullable.GetUnderlyingType(attr.PropertyInfo.PropertyType);
-            var values = Enum.GetValues(typeNullable ?? attr.PropertyInfo.PropertyType);
+            var typeNullable = Nullable.GetUnderlyingType(type);
+            var values = Enum.GetValues(typeNullable ?? type);
             if (typeNullable != null)
             {
                 items.Add(new KeyValuePair<int, string>(-1, "<Vacío>"));
             }
-            Type enumType = typeNullable ?? attr.PropertyInfo.PropertyType;
+            Type enumType = typeNullable ?? type;
             foreach (var value in values)
             {
                 var attribute = ExternalCodeAttributeExtensions.GetExternalCodeAttribute(value);

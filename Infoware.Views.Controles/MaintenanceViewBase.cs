@@ -13,35 +13,44 @@ namespace Infoware.Views.Controles
             set
             {
                 _titleText = value;
-                lblTitulo.Text = _titleText;
+                lblTitle.Text = _titleText;
                 tabControlView1.TitleText = _titleText;
             }
         }
 
-        private string _selecteText = "Seleccionar";
+        private string _selectText = "Seleccionar";
         public string SelectText
         {
-            get => _selecteText;
+            get => _selectText;
             set
             {
-                _selecteText = value;
-                btnListSeleccionar.Text = _selecteText;
+                _selectText = value;
+                btnListSelect.Text = _selectText;
+                
             }
         }
-        public bool AllowSearch { get; set; } = true;
+        public bool AllowSearch
+        {
+            get => _allowSearch; 
+            set
+            {
+                _allowSearch = value;
+                SearchVisible();
+            }
+        }
         public bool AllowNew
         {
             get => _allowNew;
             set
             {
                 _allowNew = value;
-                btnListNuevo.Visible = _allowNew;
+                btnListNew.Visible = _allowNew;
             }
         }
 
         public bool AllowEdit
         {
-            get => _allowEdit; 
+            get => _allowEdit;
             set
             {
                 _allowEdit = value;
@@ -55,13 +64,12 @@ namespace Infoware.Views.Controles
             set
             {
                 _allowDelete = value;
-                btnListEliminar.Visible = _allowDelete;
+                btnListDelete.Visible = _allowDelete;
+                sepDelete.Visible = _allowDelete;
             }
         }
-        public bool CanSearch
-        {
-            get => BindingSourceView is null ? false : BindingSourceView.HasMainSourceFunction;
-        }
+
+        public bool CanSearch => BindingSourceView?.HasMainSourceFunction ?? false;
 
         public bool CanSelection
         {
@@ -69,8 +77,8 @@ namespace Infoware.Views.Controles
             set
             {
                 canSelection = value;
-                btnListSeleccionar.Visible = canSelection;
-                sepSeleccionar.Visible = canSelection;
+                btnListSelect.Visible = canSelection;
+                sepSelect.Visible = canSelection;
             }
         }
         public event EventHandler OnPreparingAddingNewRecord;
@@ -86,6 +94,7 @@ namespace Infoware.Views.Controles
         private bool _allowNew = true;
         private bool _allowDelete = true;
         private bool _allowEdit;
+        private bool _allowSearch = true;
 
         public void SetBindingSourceView(IBindingSourceView bindingSourceView)
         {
@@ -100,34 +109,39 @@ namespace Infoware.Views.Controles
 
         private void BindingSourceView_OnMainSourceLoaded(object sender, EventArgs e)
         {
-            txtTextoBuscar.Visible = AllowSearch && CanSearch;
-            btnListBuscar.Visible = AllowSearch && CanSearch;
-            sepBuscar.Visible = AllowSearch && CanSearch;
+            SearchVisible();
+        }
+
+        private void SearchVisible()
+        {
+            txtSearch.Visible = AllowSearch && CanSearch;
+            btnListSearch.Visible = AllowSearch && CanSearch;
+            sepSearch.Visible = AllowSearch && CanSearch;
         }
 
         public MaintenanceViewBase()
         {
             InitializeComponent();
             splitContainer1.Panel2Collapsed = true;
-            txtTextoBuscar.KeyDown += TxtTextoBuscar_KeyDown;
-            btnListBuscar.Click += BtnListBuscar_Click;
-            btnListSeleccionar.Click += BtnListSeleccionar_Click;
+            txtSearch.KeyDown += TxtTextoBuscar_KeyDown;
+            btnListSearch.Click += BtnListBuscar_Click;
+            btnListSelect.Click += BtnListSeleccionar_Click;
             dataGridViewView1.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridViewView1.CellDoubleClick += DataGridViewView1_CellDoubleClick;
             dataGridViewView1.KeyDown += DataGridViewView1_KeyDown;
             dataGridViewView1.KeyPress += DataGridViewView1_KeyPress;
 
-            btnListNuevo.Click += BtnListNuevo_Click;
-            btnListEliminar.Click += BtnListEliminar_Click;
+            btnListNew.Click += BtnListNuevo_Click;
+            btnListDelete.Click += BtnListEliminar_Click;
             btnListEdit.Click += BtnListEdit_Click;
-            btnMantGuardar.Click += BtnMantGuardar_Click;
-            btnMantCancelar.Click += BtnMantCancelar_Click;
+            btnMantSave.Click += BtnMantGuardar_Click;
+            btnMantCancel.Click += BtnMantCancelar_Click;
             tabControlView1.OnLinkClicked += TabControlView1_OnLinkClicked;
         }
 
         private void DataGridViewView1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (txtTextoBuscar.Visible)
+            if (txtSearch.Visible)
             {
                 if (
                     char.IsWhiteSpace(e.KeyChar) ||
@@ -137,9 +151,9 @@ namespace Infoware.Views.Controles
                 )
                 {
                     e.Handled = true;
-                    txtTextoBuscar.Focus();
-                    txtTextoBuscar.Text = e.KeyChar.ToString();
-                    txtTextoBuscar.SelectionStart = 1;
+                    txtSearch.Focus();
+                    txtSearch.Text = e.KeyChar.ToString();
+                    txtSearch.SelectionStart = 1;
                 }
             }
         }
@@ -163,7 +177,7 @@ namespace Infoware.Views.Controles
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    if (btnListSeleccionar.Visible)
+                    if (btnListSelect.Visible)
                     {
                         e.Handled = true;
                         BtnListSeleccionar_Click(sender, EventArgs.Empty);
@@ -176,7 +190,7 @@ namespace Infoware.Views.Controles
                 }
                 else if (e.KeyCode == Keys.Insert)
                 {
-                    if (btnListNuevo.Visible)
+                    if (btnListNew.Visible)
                     {
                         e.Handled = true;
                         BtnListNuevo_Click(sender, EventArgs.Empty);
@@ -184,7 +198,7 @@ namespace Infoware.Views.Controles
                 }
                 else if (e.KeyCode == Keys.Delete)
                 {
-                    if (btnListEliminar.Visible)
+                    if (btnListDelete.Visible)
                     {
                         e.Handled = true;
                         BtnListEliminar_Click(sender, EventArgs.Empty);
@@ -200,7 +214,7 @@ namespace Infoware.Views.Controles
 
         private void BtnListBuscar_Click(object sender, EventArgs e)
         {
-            BindingSourceView.LoadData(txtTextoBuscar.Text);
+            BindingSourceView.LoadData(txtSearch.Text);
             dataGridViewView1.Focus();
         }
 
@@ -227,7 +241,7 @@ namespace Infoware.Views.Controles
         {
             splitContainer1.Panel2Collapsed = true;
             _isShowRecordReadonly = false;
-            btnMantGuardar.Visible = true;
+            btnMantSave.Visible = true;
             tabControlView1.Readonly = false;
             OnCancelShowRecordReadonly?.Invoke(this, EventArgs.Empty);
         }
@@ -267,7 +281,7 @@ namespace Infoware.Views.Controles
         {
             _isShowRecordReadonly = true;
             splitContainer1.Panel1Collapsed = true;
-            btnMantGuardar.Visible = false;
+            btnMantSave.Visible = false;
             tabControlView1.Readonly = true;
         }
 
