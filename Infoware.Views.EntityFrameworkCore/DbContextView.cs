@@ -5,7 +5,7 @@ namespace Infoware.Views.EntityFrameworkCore
 {
     public abstract class DbContextView<TDomain, TContext> : ViewBase<TDomain> where TContext : DbContext
     {
-        protected TContext Context;
+        public TContext Context { get; init; }
 
         public DbContextView(TDomain domain, TContext context, bool isNewRecord = false) : base(domain, isNewRecord)
         {

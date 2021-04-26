@@ -8,6 +8,7 @@
     <Company>Infoware Soluciones</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/vicosanz/Infoware.Views</RepositoryUrl>
+    <Description>Windows Forms implementation of Infoware.Views</Description>
   </PropertyGroup>
 
   <ItemGroup>
