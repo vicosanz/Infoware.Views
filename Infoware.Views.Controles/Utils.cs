@@ -54,7 +54,7 @@ namespace Infoware.Views.Controles
             return EnumToComboData(attr.PropertyInfo.PropertyType);
         }
 
-        private static List<KeyValuePair<object, string>> EnumToComboData(Type type)
+        public static List<KeyValuePair<object, string>> EnumToComboData(Type type)
         {
             List<KeyValuePair<object, string>> items = new();
             var typeNullable = Nullable.GetUnderlyingType(type);
@@ -85,7 +85,7 @@ namespace Infoware.Views.Controles
             return EnumToComboDataInt(attr.PropertyInfo.PropertyType);
         }
 
-        private static List<KeyValuePair<int, string>> EnumToComboDataInt(Type type)
+        public static List<KeyValuePair<int, string>> EnumToComboDataInt(Type type)
         {
             List<KeyValuePair<int, string>> items = new();
             var typeNullable = Nullable.GetUnderlyingType(type);
