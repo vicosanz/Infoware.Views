@@ -12,7 +12,7 @@ namespace Infoware.Views.Controles
         string ValueMember { get; }
 
         //void LoadData();
-        void LoadData(string searchText);
+        void LoadData(string searchText = null);
         void RemoveCurrent();
         void RevertCurrent();
         void SyncCurrent();
@@ -22,5 +22,6 @@ namespace Infoware.Views.Controles
         public Dictionary<string, Func<string, MaintenanceViewBase>> ControlsFunctions { get; set; }
         bool HasMainSourceFunction { get; }
         public event EventHandler OnMainSourceLoaded;
+        event EventHandler OnFindSourceLoaded;
     }
 }

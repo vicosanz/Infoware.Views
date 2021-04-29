@@ -3,12 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>Victor Sanchez</Authors>
     <Company>Infoware Soluciones</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/vicosanz/Infoware.Views</RepositoryUrl>
     <Description>Windows Forms implementation of Infoware.Views</Description>
+    <PackageReleaseNotes>Find function added</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

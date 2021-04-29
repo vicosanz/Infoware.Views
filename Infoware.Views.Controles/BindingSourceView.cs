@@ -11,7 +11,7 @@ namespace Infoware.Views.Controles
         public BindingSourceView()
         {
             InitializeComponent();
-            bindingSource1.CurrentItemChanged += BindingSource1_CurrentItemChanged;
+            BindingSource.CurrentItemChanged += BindingSource1_CurrentItemChanged;
         }
 
         public event EventHandler CurrentItemChanged;
@@ -26,10 +26,10 @@ namespace Infoware.Views.Controles
             container.Add(this);
 
             InitializeComponent();
-            bindingSource1.CurrentItemChanged += BindingSource1_CurrentItemChanged;
+            BindingSource.CurrentItemChanged += BindingSource1_CurrentItemChanged;
         }
 
-        public BindingSource BindingSource { get => bindingSource1; set => bindingSource1 = value; }
+        public BindingSource BindingSource { get; set; }
 
         public Dictionary<string, object> Sources { get; internal set; } = new();
 
@@ -76,7 +76,9 @@ namespace Infoware.Views.Controles
 
         #region "Sources"
         private Dictionary<string, Func<string, object>> SourcesFunctions { get; set; } = new();
-        bool _hasMainSourceFunction = false;
+        private Func<TView, object> FindFunction { get; set; }
+        private bool _hasMainSourceFunction = false;
+
         bool IBindingSourceView.HasMainSourceFunction => _hasMainSourceFunction;
 
         public void AddMainSource(Func<string, object> p)
@@ -84,6 +86,11 @@ namespace Infoware.Views.Controles
             SourcesFunctions.Remove("__main__");
             SourcesFunctions.Add("__main__", p);
             _hasMainSourceFunction = true;
+        }
+
+        public void AddFindSource(Func<TView, object> p)
+        {
+            FindFunction = p;
         }
 
         public void AddSources(string key, Func<string, object> p)
@@ -107,6 +114,18 @@ namespace Infoware.Views.Controles
                     Sources.Add(source.Key, result);
                 }
             }
+        }
+
+        public event EventHandler OnFindSourceLoaded;
+        public void Find(TView view)
+        {
+            var result = (TView)FindFunction.Invoke(view);
+            var listResult = new List<TView>
+            {
+                result
+            };
+            BindingSource.DataSource = listResult;
+            OnFindSourceLoaded?.Invoke(this, EventArgs.Empty);
         }
 
         public void SetData(object data)

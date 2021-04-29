@@ -30,12 +30,11 @@ namespace Infoware.Views.Controles
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.BindingSource = new System.Windows.Forms.BindingSource(this.components);
 
         }
 
         #endregion
-        private System.Windows.Forms.BindingSource bindingSource1;
 
     }
 }

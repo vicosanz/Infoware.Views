@@ -95,16 +95,24 @@ namespace Infoware.Views.Controles
         private bool _allowDelete = true;
         private bool _allowEdit;
         private bool _allowSearch = true;
+        private bool _isFindMode = false;
 
         public void SetBindingSourceView(IBindingSourceView bindingSourceView)
         {
             BindingSourceView = bindingSourceView;
             BindingSourceView.OnMainSourceLoaded += BindingSourceView_OnMainSourceLoaded;
+            BindingSourceView.OnFindSourceLoaded += BindingSourceView_OnFindSourceLoaded;
             errorProvider1.DataSource = bindingSourceView.BindingSource;
             dataGridViewView1.DataSource = bindingSourceView.BindingSource;
 
             tabControlView1.ControlsFunctions = bindingSourceView.ControlsFunctions;
             tabControlView1.DataSource = bindingSourceView.BindingSource;
+        }
+
+        private void BindingSourceView_OnFindSourceLoaded(object sender, EventArgs e)
+        {
+            _isFindMode = true;
+            ShowRecordReadonly();
         }
 
         private void BindingSourceView_OnMainSourceLoaded(object sender, EventArgs e)
@@ -243,6 +251,11 @@ namespace Infoware.Views.Controles
             _isShowRecordReadonly = false;
             btnMantSave.Visible = true;
             tabControlView1.Readonly = false;
+            if (_isFindMode && BindingSourceView.HasMainSourceFunction)
+            {
+                BindingSourceView.LoadData();
+            }
+            _isFindMode = false;
             OnCancelShowRecordReadonly?.Invoke(this, EventArgs.Empty);
         }
 
