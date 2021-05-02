@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Infoware.Views.Attributes;
 
@@ -81,12 +82,13 @@ namespace Infoware.Views.Controles
                 sepSelect.Visible = canSelection;
             }
         }
-        public event EventHandler OnPreparingAddingNewRecord;
-        public event EventHandler OnAddingNewRecord;
+        internal event EventHandler OnPreAddingNewRecord;
+        public event CancelEventHandler OnAddingNewRecord;
         public event EventHandler OnCancelEditRecord;
         public event EventHandler OnCancelShowRecordReadonly;
         public event EventHandler OnRecordSelected;
         public event EventHandler OnNewRecordSaved;
+        public event CancelEventHandler OnDeletingRecord;
         public event EventHandler<ShowAsAttribute> OnLinkClicked;
         private IBindingSourceView BindingSourceView;
         private bool _isShowRecordReadonly = false;
@@ -228,8 +230,10 @@ namespace Infoware.Views.Controles
 
         private void BtnListNuevo_Click(object sender, EventArgs e)
         {
-            OnPreparingAddingNewRecord?.Invoke(this, e);
-            OnAddingNewRecord?.Invoke(sender, e);
+            OnPreAddingNewRecord?.Invoke(this, e);
+            CancelEventArgs adding = new();
+            OnAddingNewRecord?.Invoke(sender, adding);
+            if (adding.Cancel) return;
             splitContainer1.Panel1Collapsed = true;
         }
 
@@ -300,6 +304,9 @@ namespace Infoware.Views.Controles
 
         private void BtnListEliminar_Click(object sender, EventArgs e)
         {
+            CancelEventArgs deleting = new();
+            OnDeletingRecord?.Invoke(sender, deleting);
+            if (deleting.Cancel) return;
             if (MessageBox.Show("¿Desea eliminar el registro?", "Pregunta", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 BindingSourceView.RemoveCurrent();

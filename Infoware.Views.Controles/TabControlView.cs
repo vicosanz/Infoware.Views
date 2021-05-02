@@ -266,7 +266,7 @@ namespace Infoware.Views.Controles
                         throw new Exception($"Mantenimiento de {attr.PropertyInfo.Name} no fue declarado");
                     }
                     control.Size = new(columnWidth, 600);
-                    control.OnPreparingAddingNewRecord += Control_OnPreparingAddingNewRecord;
+                    control.OnPreAddingNewRecord += Control_OnPreAddingNewRecord;
 
                     control.DataBindings.Add(new(nameof(MaintenanceViewBase.Data), dataSource, attr.PropertyInfo.Name));
                     panel.Controls.Add(control);
@@ -361,7 +361,7 @@ namespace Infoware.Views.Controles
             PerformLayout();
         }
 
-        private void Control_OnPreparingAddingNewRecord(object sender, EventArgs e)
+        private void Control_OnPreAddingNewRecord(object sender, EventArgs e)
         {
             ((MaintenanceViewBase)sender).ParentObject = ((BindingSource)dataSource).Current;
         }
