@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Infoware.Views.Attributes;
 using Infoware.Views.Enums;
+using Infoware.Views.Extensions;
 
 namespace Infoware.Views.Controles
 {
@@ -348,7 +349,16 @@ namespace Infoware.Views.Controles
                         ReadOnly = !isEnable,
                         TabStop = isEnable
                     };
-                    textBox.DataBindings.Add(new Binding(nameof(TextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty));
+                    if (attr.PropertyInfo.PropertyType.IsNumericType()){
+                        textBox.TextAlign = HorizontalAlignment.Right;
+                    }
+
+                    Binding binding = new(nameof(TextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty);
+                    if (!string.IsNullOrWhiteSpace(attr.Format))
+                    {
+                        binding.FormatString = attr.Format;
+                    }
+                    textBox.DataBindings.Add(binding);
 
                     var panelField = CreatePanelControl(panel, attr, textBox, 30);
                     if (!string.IsNullOrWhiteSpace(attr.ShowIf))

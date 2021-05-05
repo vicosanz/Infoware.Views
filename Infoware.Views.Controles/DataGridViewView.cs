@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Infoware.Views.Attributes;
 using Infoware.Views.Enums;
+using Infoware.Views.Extensions;
 
 namespace Infoware.Views.Controles
 {
@@ -109,6 +110,14 @@ namespace Infoware.Views.Controles
                     else
                     {
                         column = new DataGridViewTextBoxColumn();
+                        if (attr.PropertyInfo.PropertyType.IsNumericType())
+                        {
+                            column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        }
+                        if (!string.IsNullOrWhiteSpace(attr.Format))
+                        {
+                            column.DefaultCellStyle.Format = attr.Format;
+                        }
                     }
 
                     column.ValueType = attr.PropertyInfo.PropertyType;

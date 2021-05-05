@@ -18,6 +18,7 @@ namespace Infoware.Views.Attributes
         public bool IsDefaultValue { get; set; }
         public bool IsDefaultId { get; set; }
         public string UpdateField { get; set; } = null!;
+        public string Format { get; set; }
         public int Size { get; set; }
         public DisplayAttribute DisplayAttribute { get; set; }
         public string Label => DisplayAttribute?.GetName() ?? PropertyInfo.Name;
