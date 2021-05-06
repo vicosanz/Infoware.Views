@@ -19,11 +19,15 @@ namespace test
         public string Name { get; set; }
 
         [Required]
-        [ShowAs(EnumControls.TextBox, Size = 38, Format ="0.00")]
+        [ShowAs(EnumControls.TextBox, Size = 10, Format ="0.00")]
         [Display(Name = "Income:")]
 
         public decimal Income { get; set; }
 
+        [Required]
+        [ShowAs(EnumControls.ComboBox, Size = 15)]
+        [Display(Name = "What kind of person are you?:")]
+        public EnumTypePerson TypePerson { get; set; }
 
 
         public CustomerView(Customer customer) :base(customer, true)
@@ -35,6 +39,7 @@ namespace test
         {
             Name = Domain_.Name;
             Income = Domain_.Income;
+            TypePerson = Domain_.TypePerson;
         }
 
 
@@ -47,6 +52,7 @@ namespace test
         {
             Domain_.Name = Name;
             Domain_.Income = Income;
+            Domain_.TypePerson = TypePerson;
             return Domain_;
         }
     }

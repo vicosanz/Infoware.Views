@@ -11,5 +11,7 @@ namespace test
         public string Name { get; set; }
 
         public decimal Income { get; set; }
+
+        public EnumTypePerson TypePerson { get; set; }
     }
 }

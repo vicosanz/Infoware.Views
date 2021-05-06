@@ -382,27 +382,32 @@ namespace Infoware.Views.Controles
             this.SelectNextControl((Control)sender, true, true, true, true);
         }
 
-        public static FlowLayoutPanel CreatePanelControl(FlowLayoutPanel panel, ShowAsAttribute attr, Control control, int height)
+        public static TableLayoutPanel CreatePanelControl(FlowLayoutPanel panel, ShowAsAttribute attr, Control control, int height)
         {
             return CreatePanelControl(panel, attr, new Control[] { control }, height);
         }
 
-        public static FlowLayoutPanel CreatePanelControl(
+        public static TableLayoutPanel CreatePanelControl(
             FlowLayoutPanel pnlTab, ShowAsAttribute attrLabel, Control[] controls, int height)
         {
-            FlowLayoutPanel pnlControl = new()
+            TableLayoutPanel pnlControl = new()
             {
-                FlowDirection = FlowDirection.LeftToRight,
+                ColumnCount = 2,
+                RowCount = 1,
                 Width = columnWidth,
                 AutoSize = true,
+                Padding = new Padding(0, 0, 16, 0)
             };
+            pnlControl.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, labelWidth));
+            pnlControl.ColumnStyles.Add(new ColumnStyle());
             if (attrLabel != null)
             {
                 pnlControl.Controls.Add(
                     new Label()
                     {
                         Text = attrLabel.Label,
-                        Width = labelWidth
+                        AutoSize = true,
+                        AutoEllipsis = true
                     }
                 );
             }
