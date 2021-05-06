@@ -39,7 +39,6 @@ namespace test
             this.maintenanceCustomer1.AllowNew = true;
             this.maintenanceCustomer1.AllowSearch = true;
             this.maintenanceCustomer1.CanSelection = false;
-            this.maintenanceCustomer1.Data = null;
             this.maintenanceCustomer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.maintenanceCustomer1.Location = new System.Drawing.Point(0, 0);
             this.maintenanceCustomer1.Name = "maintenanceCustomer1";
