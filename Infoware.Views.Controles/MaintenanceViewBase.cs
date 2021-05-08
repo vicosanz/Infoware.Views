@@ -335,7 +335,7 @@ namespace Infoware.Views.Controles
             get => BindingSourceView?.BindingSource?.DataSource;
             set
             {
-                BindingSourceView.SetData(value);
+                BindingSourceView?.SetData(value);
             }
         }
 
