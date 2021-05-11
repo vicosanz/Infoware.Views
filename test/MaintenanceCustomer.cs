@@ -14,6 +14,12 @@ namespace test
         public MaintenanceCustomer():base()
         {
             SetBindingSourceView(_bindingSourceView);
+            OnSavingRecord += MaintenanceCustomer_OnSavingRecord;
+        }
+
+        private void MaintenanceCustomer_OnSavingRecord(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _bindingSourceView.Current.CustomerCode = _bindingSourceView.Current.CustomerCode.Replace("-", "");
         }
 
         public void LoadData()

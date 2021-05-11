@@ -340,6 +340,63 @@ namespace Infoware.Views.Controles
                     }
                     panel.Controls.Add(checkBox);
                 }
+                else if (attr.Control == EnumControls.MaskedTextBox)
+                {
+                    MaskedTextBox textBox = new()
+                    {
+                        Tag = attr,
+                        Width = attr.Size * 10,
+                        ReadOnly = !isEnable,
+                        TabStop = isEnable,
+                        Mask = attr.Format
+                    };
+                    if (attr.PropertyInfo.PropertyType.IsNumericType())
+                    {
+                        textBox.TextAlign = HorizontalAlignment.Right;
+                    }
+
+                    Binding binding = new(nameof(MaskedTextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty);
+                    if (!string.IsNullOrWhiteSpace(attr.Format))
+                    {
+                        binding.FormatString = attr.Format;
+                    }
+                    textBox.DataBindings.Add(binding);
+
+                    var panelField = CreatePanelControl(panel, attr, textBox, 30);
+                    if (!string.IsNullOrWhiteSpace(attr.ShowIf))
+                    {
+                        panelField.DataBindings.Add(nameof(Visible), dataSource, attr.ShowIf);
+                    }
+                }
+                else if (attr.Control == EnumControls.DateTimePicker)
+                {
+                    DateTimePicker dateTimePicker = new()
+                    {
+                        Tag = attr,
+                        Width = attr.Size * 10,
+                        Enabled = isEnable,
+                        TabStop = isEnable,
+                    };
+
+                    if (!string.IsNullOrWhiteSpace(attr.Format))
+                    {
+                        dateTimePicker.Format = DateTimePickerFormat.Custom;
+                        dateTimePicker.CustomFormat = attr.Format;
+                    }
+
+                    Binding binding = new(nameof(MaskedTextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty);
+                    if (!string.IsNullOrWhiteSpace(attr.Format))
+                    {
+                        binding.FormatString = attr.Format;
+                    }
+                    dateTimePicker.DataBindings.Add(binding);
+
+                    var panelField = CreatePanelControl(panel, attr, dateTimePicker, 30);
+                    if (!string.IsNullOrWhiteSpace(attr.ShowIf))
+                    {
+                        panelField.DataBindings.Add(nameof(Visible), dataSource, attr.ShowIf);
+                    }
+                }
                 else
                 {
                     TextBox textBox = new()
@@ -349,7 +406,8 @@ namespace Infoware.Views.Controles
                         ReadOnly = !isEnable,
                         TabStop = isEnable
                     };
-                    if (attr.PropertyInfo.PropertyType.IsNumericType()){
+                    if (attr.PropertyInfo.PropertyType.IsNumericType())
+                    {
                         textBox.TextAlign = HorizontalAlignment.Right;
                     }
 

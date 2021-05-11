@@ -8,5 +8,7 @@
         ComboBox,
         None,
         Link,
+        MaskedTextBox,
+        DateTimePicker
     }
 }

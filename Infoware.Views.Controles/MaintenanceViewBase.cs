@@ -84,6 +84,7 @@ namespace Infoware.Views.Controles
         }
         internal event EventHandler OnPreAddingNewRecord;
         public event CancelEventHandler OnAddingNewRecord;
+        public event CancelEventHandler OnSavingRecord;
         public event EventHandler OnCancelEditRecord;
         public event EventHandler OnCancelShowRecordReadonly;
         public event EventHandler OnRecordSelected;
@@ -267,6 +268,10 @@ namespace Infoware.Views.Controles
         {
             try
             {
+                CancelEventArgs saving = new();
+                OnSavingRecord?.Invoke(this, saving);
+                if (saving.Cancel) return;
+
                 bool IsNew = BindingSourceView.Current.IsNewRecord;
                 BindingSourceView.BindingSource.EndEdit();
                 if (BindingSourceView.Current.Error != null)

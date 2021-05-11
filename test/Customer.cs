@@ -13,5 +13,9 @@ namespace test
         public decimal Income { get; set; }
 
         public EnumTypePerson TypePerson { get; set; }
+
+        public string CustomerCode { get; set; }
+
+        public DateTime CustomerSince { get; set; }
     }
 }

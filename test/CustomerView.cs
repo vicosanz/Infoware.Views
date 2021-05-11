@@ -29,6 +29,15 @@ namespace test
         [Display(Name = "What kind of person are you?:")]
         public EnumTypePerson TypePerson { get; set; }
 
+        [Required]
+        [ShowAs(EnumControls.MaskedTextBox, Size = 15, Format = "000-000")]
+        [Display(Name = "Enter your customer code?:")]
+        public string CustomerCode { get; set; }
+
+        [Required]
+        [ShowAs(EnumControls.DateTimePicker, Size = 15, Format = "dd/MM/yyyy")]
+        [Display(Name = "Customer since:")]
+        public DateTime CustomerSince { get; set; }
 
         public CustomerView(Customer customer) :base(customer, true)
         {
@@ -40,6 +49,8 @@ namespace test
             Name = Domain_.Name;
             Income = Domain_.Income;
             TypePerson = Domain_.TypePerson;
+            CustomerCode = Domain_.CustomerCode;
+            CustomerSince = Domain_.CustomerSince;
         }
 
 
@@ -53,6 +64,8 @@ namespace test
             Domain_.Name = Name;
             Domain_.Income = Income;
             Domain_.TypePerson = TypePerson;
+            Domain_.CustomerCode = CustomerCode;
+            Domain_.CustomerSince = CustomerSince;
             return Domain_;
         }
     }
