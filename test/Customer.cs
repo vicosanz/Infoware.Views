@@ -17,5 +17,7 @@ namespace test
         public string CustomerCode { get; set; }
 
         public DateTime CustomerSince { get; set; }
+
+        public int IQ { get; set; }
     }
 }

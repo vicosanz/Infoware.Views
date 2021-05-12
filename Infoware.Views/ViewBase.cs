@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -40,11 +41,13 @@ namespace Infoware.Views
                 var results = new List<ValidationResult>();
                 var result = Validator.TryValidateProperty(
                                           propertyDescriptor.GetValue(this),
-                                          new ValidationContext(this, null, null)
-                                          { MemberName = property },
+                                          new ValidationContext(this, null, null) { MemberName = property },
                                           results);
-                if (!result)
+                var result2 = Validate(property, results);
+
+                if (!result || !result2)
                     return results.First().ErrorMessage;
+
                 return string.Empty;
             }
         }
@@ -55,6 +58,8 @@ namespace Infoware.Views
             get
             {
                 var results = new List<ValidationResult>();
+                Validate(null, results);
+
                 var result = Validator.TryValidateObject(this,
                     new ValidationContext(this, null, null), results, true);
                 if (!result)
@@ -62,6 +67,11 @@ namespace Infoware.Views
                 else
                     return null;
             }
+        }
+
+        public bool Validate(string property, List<ValidationResult> results)
+        {
+            return true;
         }
         #endregion
 
