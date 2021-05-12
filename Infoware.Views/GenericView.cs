@@ -1,4 +1,7 @@
-﻿namespace Infoware.Views
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Infoware.Views
 {
     public abstract class GenericView<TDomain> : ViewBase<TDomain>
     {
@@ -14,6 +17,11 @@
         }
 
         public override bool Remove()
+        {
+            return true;
+        }
+
+        public override bool Validate(string property, List<ValidationResult> results)
         {
             return true;
         }

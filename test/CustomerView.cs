@@ -58,19 +58,19 @@ namespace test
             CustomerSince = Domain_.CustomerSince;
         }
 
-        public override bool Validate(string property, List<ValidationResult> results)
-        {
-            bool result = true;
-            if (property == nameof(IQ) || property is null)
-            {
-                if (TypePerson == EnumTypePerson.Smart && IQ < 100)
-                {
-                    result = false;
-                    results.Add(new ValidationResult("You are not enough smart"));
-                }
-            }
-            return result;
-        }
+        //public override bool Validate(string property, List<ValidationResult> results)
+        //{
+        //    bool result = true;
+        //    if (property == nameof(IQ) || property is null)
+        //    {
+        //        if (TypePerson == EnumTypePerson.Smart && IQ < 100)
+        //        {
+        //            result = false;
+        //            results.Add(new ValidationResult("You are not enough smart"));
+        //        }
+        //    }
+        //    return result;
+        //}
 
         public override void RevertFromDomain()
         {

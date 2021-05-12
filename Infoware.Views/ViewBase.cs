@@ -58,21 +58,18 @@ namespace Infoware.Views
             get
             {
                 var results = new List<ValidationResult>();
-                Validate(null, results);
+                var result2 = Validate(null, results);
 
                 var result = Validator.TryValidateObject(this,
                     new ValidationContext(this, null, null), results, true);
-                if (!result)
+                if (!result || !result2)
                     return string.Join("\n", results.Select(x => x.ErrorMessage));
                 else
                     return null;
             }
         }
 
-        public bool Validate(string property, List<ValidationResult> results)
-        {
-            return true;
-        }
+        public abstract bool Validate(string property, List<ValidationResult> results);
         #endregion
 
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infoware.Views.EntityFrameworkCore
@@ -55,6 +57,11 @@ namespace Infoware.Views.EntityFrameworkCore
             {
                 throw;
             }
+            return true;
+        }
+
+        public override bool Validate(string property, List<ValidationResult> results)
+        {
             return true;
         }
     }
