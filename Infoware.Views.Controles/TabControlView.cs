@@ -292,7 +292,7 @@ namespace Infoware.Views.Controles
                         Enabled = isEnable,
                         TabStop = isEnable
                     };
-                    comboBox.SelectionChangeCommitted += Control_UserChanged;
+                    comboBox.SelectedIndexChanged += Control_UserChanged;
                     comboBox.DataBindings.Add(new Binding(nameof(comboBox.SelectedValue), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged));
                     controls.Add(comboBox);
                     var panelField = CreatePanelControl(panel, attr, controls.ToArray(), 33);
@@ -317,7 +317,7 @@ namespace Infoware.Views.Controles
                         TabStop = isUpdateFieldEnable
                     };
 
-                    comboBox.SelectionChangeCommitted += Control_UserChanged;
+                    comboBox.SelectedIndexChanged += Control_UserChanged;
                     Binding binding = new(nameof(comboBox.SelectedValue), dataSource, attr.UpdateField, false, DataSourceUpdateMode.OnPropertyChanged);
                     comboBox.DataBindings.Add(binding);
                     controls.Add(comboBox);
@@ -440,6 +440,7 @@ namespace Infoware.Views.Controles
 
         private void Control_UserChanged(object sender, EventArgs e)
         {
+            if (!Enabled && !Readonly) return;
             OnUserRecordChanged?.Invoke(sender, (ShowAsAttribute)((Control)sender).Tag);
         }
 

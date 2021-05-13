@@ -135,6 +135,7 @@ namespace Infoware.Views.Controles
         {
             InitializeComponent();
             splitContainer1.Panel2Collapsed = true;
+            tabControlView1.Enabled = false;
             txtSearch.KeyDown += TxtTextoBuscar_KeyDown;
             btnListSearch.Click += BtnListBuscar_Click;
             btnListSelect.Click += BtnListSeleccionar_Click;
@@ -243,6 +244,7 @@ namespace Infoware.Views.Controles
             OnAddingNewRecord?.Invoke(sender, adding);
             if (adding.Cancel) return;
             splitContainer1.Panel1Collapsed = true;
+            tabControlView1.Enabled = true;
         }
 
         private void BtnMantCancelar_Click(object sender, EventArgs e)
@@ -250,6 +252,7 @@ namespace Infoware.Views.Controles
             OnCancelEditRecord?.Invoke(sender, e);
             BindingSourceView.RevertCurrent();
             splitContainer1.Panel2Collapsed = true;
+            tabControlView1.Enabled = false;
 
             if (_isShowRecordReadonly)
             {
@@ -260,6 +263,7 @@ namespace Infoware.Views.Controles
         public void CancelReadonlyRecordMode()
         {
             splitContainer1.Panel2Collapsed = true;
+            tabControlView1.Enabled = false;
             _isShowRecordReadonly = false;
             btnMantSave.Visible = true;
             tabControlView1.Readonly = false;
@@ -291,6 +295,7 @@ namespace Infoware.Views.Controles
                     OnNewRecordSaved?.Invoke(sender, e);
                 }
                 splitContainer1.Panel2Collapsed = true;
+                tabControlView1.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -303,6 +308,7 @@ namespace Infoware.Views.Controles
             if (BindingSourceView.Current != null)
             {
                 splitContainer1.Panel1Collapsed = true;
+                tabControlView1.Enabled = true;
             }
         }
 
@@ -310,6 +316,7 @@ namespace Infoware.Views.Controles
         {
             _isShowRecordReadonly = true;
             splitContainer1.Panel1Collapsed = true;
+            tabControlView1.Enabled = true;
             btnMantSave.Visible = false;
             tabControlView1.Readonly = true;
         }
@@ -352,6 +359,5 @@ namespace Infoware.Views.Controles
         }
 
         public object ParentObject { get; set; }
-
     }
 }

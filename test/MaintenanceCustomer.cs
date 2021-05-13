@@ -24,6 +24,7 @@ namespace test
             if (e.PropertyInfo.Name == nameof(CustomerView.TypePerson))
             {
                 _bindingSourceView.Current.Income = _bindingSourceView.Current.TypePerson == EnumTypePerson.Fast ? 500 : 600;
+                _bindingSourceView.BindingSource.ResetCurrentItem();
             }
         }
 
@@ -41,6 +42,10 @@ namespace test
             data.Add(new CustomerView(new Customer()
             {
                 Name = "Peter"
+            }));
+            data.Add(new CustomerView(new Customer()
+            {
+                Name = "Peter1"
             }));
             _bindingSourceView.SetData(data);
         }
