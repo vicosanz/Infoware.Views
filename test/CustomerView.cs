@@ -19,7 +19,7 @@ namespace test
         public string Name { get; set; }
 
         [Required]
-        [ShowAs(EnumControls.TextBox, Size = 10, Format ="0.00")]
+        [ShowAs(EnumControls.TextBox, Size = 10, Format = "0.00")]
         [Display(Name = "Income:")]
 
         public decimal Income { get; set; }
@@ -44,7 +44,13 @@ namespace test
         [Display(Name = "IQ:")]
         public int IQ { get; set; }
 
-        public CustomerView(Customer customer) :base(customer, true)
+        [Required]
+        [ShowAs(EnumControls.TextBox, Size = 15)]
+        [Display(Name = "Tall?:")]
+        public bool IsTall { get; set; }
+
+
+        public CustomerView(Customer customer) : base(customer, true)
         {
             MapFromDomain();
         }
@@ -58,19 +64,19 @@ namespace test
             CustomerSince = Domain_.CustomerSince;
         }
 
-        //public override bool Validate(string property, List<ValidationResult> results)
-        //{
-        //    bool result = true;
-        //    if (property == nameof(IQ) || property is null)
-        //    {
-        //        if (TypePerson == EnumTypePerson.Smart && IQ < 100)
-        //        {
-        //            result = false;
-        //            results.Add(new ValidationResult("You are not enough smart"));
-        //        }
-        //    }
-        //    return result;
-        //}
+        public override bool Validate(string property, List<ValidationResult> results)
+        {
+            bool result = true;
+            if (property == nameof(IQ) || property is null)
+            {
+                if (TypePerson == EnumTypePerson.Smart && IQ < 100)
+                {
+                    result = false;
+                    results.Add(new ValidationResult("You are not enough smart"));
+                }
+            }
+            return result;
+        }
 
         public override void RevertFromDomain()
         {
@@ -86,5 +92,6 @@ namespace test
             Domain_.CustomerSince = CustomerSince;
             return Domain_;
         }
+
     }
 }

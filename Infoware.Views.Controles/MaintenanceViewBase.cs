@@ -91,6 +91,7 @@ namespace Infoware.Views.Controles
         public event EventHandler OnNewRecordSaved;
         public event CancelEventHandler OnDeletingRecord;
         public event EventHandler<ShowAsAttribute> OnLinkClicked;
+        public event EventHandler<ShowAsAttribute> OnUserRecordChanged;
         private IBindingSourceView BindingSourceView;
         private bool _isShowRecordReadonly = false;
         private bool canSelection = true;
@@ -148,6 +149,12 @@ namespace Infoware.Views.Controles
             btnMantSave.Click += BtnMantGuardar_Click;
             btnMantCancel.Click += BtnMantCancelar_Click;
             tabControlView1.OnLinkClicked += TabControlView1_OnLinkClicked;
+            tabControlView1.OnUserRecordChanged += TabControlView1_OnUserRecordChanged;
+        }
+
+        private void TabControlView1_OnUserRecordChanged(object sender, ShowAsAttribute e)
+        {
+            OnUserRecordChanged?.Invoke(sender, e);
         }
 
         private void DataGridViewView1_KeyPress(object sender, KeyPressEventArgs e)

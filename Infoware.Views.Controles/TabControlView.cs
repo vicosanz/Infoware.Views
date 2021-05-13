@@ -162,6 +162,7 @@ namespace Infoware.Views.Controles
         public event EventHandler<BindingSource> OnOpenRecord;
         public event EventHandler<BindingSource> OnAddNewItemList;
         public event EventHandler<ShowAsAttribute> OnLinkClicked;
+        public event EventHandler<ShowAsAttribute> OnUserRecordChanged;
         protected virtual void OnDataBindingComplete(DataGridViewBindingCompleteEventArgs e)
         {
             DataGridViewBindingCompleteEventHandler eh = (DataGridViewBindingCompleteEventHandler)(Events[DataBindingCompleteEvent]);
@@ -291,6 +292,7 @@ namespace Infoware.Views.Controles
                         Enabled = isEnable,
                         TabStop = isEnable
                     };
+                    comboBox.SelectionChangeCommitted += Control_UserChanged;
                     comboBox.DataBindings.Add(new Binding(nameof(comboBox.SelectedValue), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged));
                     controls.Add(comboBox);
                     var panelField = CreatePanelControl(panel, attr, controls.ToArray(), 33);
@@ -314,6 +316,8 @@ namespace Infoware.Views.Controles
                         Enabled = isUpdateFieldEnable,
                         TabStop = isUpdateFieldEnable
                     };
+
+                    comboBox.SelectionChangeCommitted += Control_UserChanged;
                     Binding binding = new(nameof(comboBox.SelectedValue), dataSource, attr.UpdateField, false, DataSourceUpdateMode.OnPropertyChanged);
                     comboBox.DataBindings.Add(binding);
                     controls.Add(comboBox);
@@ -333,6 +337,8 @@ namespace Infoware.Views.Controles
                         Enabled = isEnable,
                         TabStop = isEnable
                     };
+                    checkBox.Validated += Control_UserChanged;
+
                     checkBox.DataBindings.Add(new(nameof(CheckBox.Checked), dataSource, attr.PropertyInfo.Name, false, DataSourceUpdateMode.OnPropertyChanged));
                     if (!string.IsNullOrWhiteSpace(attr.ShowIf))
                     {
@@ -354,6 +360,7 @@ namespace Infoware.Views.Controles
                     {
                         textBox.TextAlign = HorizontalAlignment.Right;
                     }
+                    textBox.Validated += Control_UserChanged;
 
                     Binding binding = new(nameof(MaskedTextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty);
                     if (!string.IsNullOrWhiteSpace(attr.Format))
@@ -383,6 +390,7 @@ namespace Infoware.Views.Controles
                         dateTimePicker.Format = DateTimePickerFormat.Custom;
                         dateTimePicker.CustomFormat = attr.Format;
                     }
+                    dateTimePicker.Validated += Control_UserChanged;
 
                     Binding binding = new(nameof(MaskedTextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty);
                     if (!string.IsNullOrWhiteSpace(attr.Format))
@@ -410,6 +418,7 @@ namespace Infoware.Views.Controles
                     {
                         textBox.TextAlign = HorizontalAlignment.Right;
                     }
+                    textBox.Validated += Control_UserChanged;
 
                     Binding binding = new(nameof(TextBox.Text), dataSource, attr.PropertyInfo.Name, true, DataSourceUpdateMode.OnPropertyChanged, string.Empty);
                     if (!string.IsNullOrWhiteSpace(attr.Format))
@@ -427,6 +436,11 @@ namespace Infoware.Views.Controles
             }
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void Control_UserChanged(object sender, EventArgs e)
+        {
+            OnUserRecordChanged?.Invoke(sender, (ShowAsAttribute)((Control)sender).Tag);
         }
 
         private void Control_OnPreAddingNewRecord(object sender, EventArgs e)

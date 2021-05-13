@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infoware.Views.Attributes;
 using Infoware.Views.Controles;
 
 namespace test
@@ -15,6 +16,15 @@ namespace test
         {
             SetBindingSourceView(_bindingSourceView);
             OnSavingRecord += MaintenanceCustomer_OnSavingRecord;
+            OnUserRecordChanged += MaintenanceCustomer1_OnUserRecordChanged;
+        }
+
+        private void MaintenanceCustomer1_OnUserRecordChanged(object sender, ShowAsAttribute e)
+        {
+            if (e.PropertyInfo.Name == nameof(CustomerView.TypePerson))
+            {
+                _bindingSourceView.Current.Income = _bindingSourceView.Current.TypePerson == EnumTypePerson.Fast ? 500 : 600;
+            }
         }
 
         private void MaintenanceCustomer_OnSavingRecord(object sender, System.ComponentModel.CancelEventArgs e)

@@ -19,5 +19,7 @@ namespace test
         public DateTime CustomerSince { get; set; }
 
         public int IQ { get; set; }
+
+        public bool IsTall { get; set; }
     }
 }
