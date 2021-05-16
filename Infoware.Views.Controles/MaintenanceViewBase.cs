@@ -277,6 +277,7 @@ namespace Infoware.Views.Controles
 
         private void BtnMantGuardar_Click(object sender, EventArgs e)
         {
+            if (BindingSourceView.Current is null) return;
             try
             {
                 CancelEventArgs saving = new();
@@ -305,11 +306,9 @@ namespace Infoware.Views.Controles
 
         private void BtnListEdit_Click(object sender, EventArgs e)
         {
-            if (BindingSourceView.Current != null)
-            {
-                splitContainer1.Panel1Collapsed = true;
-                tabControlView1.Enabled = true;
-            }
+            if (BindingSourceView.Current is null) return;
+            splitContainer1.Panel1Collapsed = true;
+            tabControlView1.Enabled = true;
         }
 
         public void ShowRecordReadonly()
@@ -323,6 +322,7 @@ namespace Infoware.Views.Controles
 
         private void BtnListEliminar_Click(object sender, EventArgs e)
         {
+            if (BindingSourceView.Current is null) return;
             CancelEventArgs deleting = new();
             OnDeletingRecord?.Invoke(sender, deleting);
             if (deleting.Cancel) return;

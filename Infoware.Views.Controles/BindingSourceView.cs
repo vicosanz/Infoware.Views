@@ -48,6 +48,7 @@ namespace Infoware.Views.Controles
 
         public void RevertCurrent()
         {
+            if (Current is null) return;
             if (Current.IsNewRecord)
             {
                 RemoveCurrent();
@@ -67,6 +68,7 @@ namespace Infoware.Views.Controles
 
         public void RemoveCurrent()
         {
+            if (Current is null) return;
             if (!Current.IsNewRecord)
             {
                 Current.Remove();
