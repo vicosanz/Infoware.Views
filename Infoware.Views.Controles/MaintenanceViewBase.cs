@@ -280,12 +280,12 @@ namespace Infoware.Views.Controles
             if (BindingSourceView.Current is null) return;
             try
             {
+                BindingSourceView.BindingSource.EndEdit();
                 CancelEventArgs saving = new();
                 OnSavingRecord?.Invoke(this, saving);
                 if (saving.Cancel) return;
 
                 bool IsNew = BindingSourceView.Current.IsNewRecord;
-                BindingSourceView.BindingSource.EndEdit();
                 if (BindingSourceView.Current.Error != null)
                 {
                     throw new Exception(BindingSourceView.Current.Error);
