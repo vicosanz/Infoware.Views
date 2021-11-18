@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.1.5</Version>
+    <Version>1.1.6</Version>
     <Authors>Victor Sanchez</Authors>
     <Company>Infoware Soluciones</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Infoware.Core" Version="1.0.0" />
+    <PackageReference Include="Infoware.Core" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
